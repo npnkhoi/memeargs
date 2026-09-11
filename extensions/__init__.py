@@ -32,30 +32,14 @@ _PROCESSORS: dict[str, type] = {
     # Every stage that asks a model for a structured output.
     "LLMProcessor": GraphLLMProcessor,
     # Deterministic graph surgery.
-    "GraphCleaningProcessor": processors.GraphCleaningProcessor,
     "GraphConverter": processors.GraphConverter,
     "HumanGraphProcessor": processors.HumanGraphProcessor,
     "EdgeConstructionToModelGraphProcessor": processors.EdgeConstructionToModelGraphProcessor,
-    "ClaimMergeProcessor": processors.ClaimMergeProcessor,
-    "OrphanRemoveProcessor": processors.OrphanRemoveProcessor,
-    "UngroundedClaimsRemoveProcessor": processors.UngroundedClaimsRemoveProcessor,
-    "StructureProcessor": processors.StructureProcessor,
-    "ParaphraseProcessor": processors.ParaphraseProcessor,
-    # Applying an audit that an LLM stage produced.
-    "ConclusionAuditApplyProcessor": processors.ConclusionAuditApplyProcessor,
-    "ElementAuditApplyProcessor": processors.ElementAuditApplyProcessor,
-    "ClaimAuditApplyProcessor": processors.ClaimAuditApplyProcessor,
-    "ArgumentAuditApplyProcessor": processors.ArgumentAuditApplyProcessor,
-    "PremiseAuditApplyProcessor": processors.PremiseAuditApplyProcessor,
-    "BackgroundAuditApplyProcessor": processors.BackgroundAuditApplyProcessor,
     # Evaluation.
-    "GraphAutoEvalProcessor": processors.GraphAutoEvalProcessor,
     "GeminiGraphAutoEvalProcessor": processors.GeminiGraphAutoEvalProcessor,
     "TypedEdgeEvalProcessor": processors.TypedEdgeEvalProcessor,
     "MatchingGEDProcessor": processors.MatchingGEDProcessor,
     "EdgeEvalProcessor": processors.EdgeEvalProcessor,
-    "EvaluationCollector": processors.EvaluationCollector,
-    "RubricEvalProcessor": processors.RubricEvalProcessor,
 }
 
 

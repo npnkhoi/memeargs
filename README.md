@@ -135,16 +135,17 @@ throughout the paper.
 
 ## Citation
 
-The paper is currently a preprint (no venue yet). Cite it as:
+The paper will appear in the main conference of EMNLP 2026. Cite it as:
 
 ```bibtex
-@misc{nguyen2026memeargs,
-  title  = {MemeArgs: Vision-Language Argument Mining in Persuasive Memes},
-  author = {Nguyen, Khoi P. N. and Nguyen, Trung N. and Li, Terrence and Patel, Teerth and Ng, Vincent},
-  year   = {2026},
-  institution = {Human Language Technology Research Institute, University of Texas at Dallas},
-  note   = {Preprint. See paper.pdf in this repository; update with the published venue once available.},
-  url    = {https://github.com/npnkhoi/memeargs}
+@inproceedings{nguyen2026memeargs,
+  title     = {MemeArgs: Vision-Language Argument Mining in Persuasive Memes},
+  author    = {Nguyen, Khoi P. N. and Nguyen, Trung N. and Li, Terrence and Patel, Teerth and Ng, Vincent},
+  booktitle = {Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing},
+  year      = {2026},
+  publisher = {Association for Computational Linguistics},
+  note      = {To appear. See paper.pdf in this repository; update with page numbers once the proceedings are published.},
+  url       = {https://github.com/npnkhoi/memeargs}
 }
 ```
 

@@ -18,57 +18,8 @@ class MatchingResult(BaseModel):
     claim_matches: list[NodeMatchPair]
 
 
-class StructuralIssues(BaseModel):
-    errors: list[str]
-    warnings: list[str]
-
-
-
-class SoftAspectEvaluation(BaseModel):
-    reason: str
-    score: int | None = None
-
-class AspectEvaluation(SoftAspectEvaluation):
-    # Override score to be required and stricter for the hard evaluation.
-    score: int  # 0-4
-
-ConclusionEvaluation = AspectEvaluation
-ElementEvaluation = AspectEvaluation
-BackgroundEvaluation = AspectEvaluation
-ClaimEvaluation = AspectEvaluation
-RelationEvaluation = AspectEvaluation
-OverallEvaluation = AspectEvaluation
-
-class Evaluation(BaseModel):
-    element: SoftAspectEvaluation
-    background: SoftAspectEvaluation
-    conclusion: SoftAspectEvaluation
-    claim: SoftAspectEvaluation
-    relation: SoftAspectEvaluation
-    overall: SoftAspectEvaluation
-
-ConclusionEvaluationByGemini = AspectEvaluation
-ElementEvaluationByGemini = AspectEvaluation
-BackgroundEvaluationByGemini = AspectEvaluation
-ClaimEvaluationByGemini = AspectEvaluation
-RelationEvaluationByGemini = AspectEvaluation
-OverallEvaluationByGemini = AspectEvaluation
-
-class EvaluationByGemini(BaseModel):
-    element: SoftAspectEvaluation
-    background: SoftAspectEvaluation
-    conclusion: SoftAspectEvaluation
-    claim: SoftAspectEvaluation
-    relation: SoftAspectEvaluation
-    overall: SoftAspectEvaluation
-
-class GraphCheckResult(BaseModel):
-    errors: list[str]
-    warnings: list[str]
-
-
 class _GraphAutoEvalResultBase(BaseModel):
-    """Shared fields for NLI-based and Gemini-based graph auto-eval results."""
+    """Shared fields for graph auto-eval results."""
     node_precision: float
     node_recall: float
     node_f1: float
@@ -113,53 +64,10 @@ class _GraphAutoEvalResultBase(BaseModel):
     n_model_edges: int = 0
     n_matched_edges: int = 0
     matched_pairs: list[tuple[int, int]] = []  # list of (human_node_idx, model_node_idx)
-    similarity_matrix: list[list[float]] = []  # optional similarity matrix used for matching
-
-
-class GraphAutoEvalResult(_GraphAutoEvalResultBase):
-    """Result of graph-based automatic evaluation (greedy NLI-match F1 + GED)."""
 
 
 class GeminiGraphAutoEvalResult(_GraphAutoEvalResultBase):
     """Result of graph-based automatic evaluation using Gemini-based node matching."""
-
-
-# --- Rubric-based reference-free evaluation types ---
-
-class Mistake(BaseModel):
-    node_idx: int | None = None
-    issue: str
-    detail: str
-
-
-class StageResult(BaseModel):
-    score: int          # 1-5
-    mistakes: list[Mistake] = []
-    reason: str
-
-
-class Phase0Result(BaseModel):
-    passed: bool
-    checks: dict[str, bool]
-    errors: list[str]
-    auto_edge_score: int | None = None
-
-
-class RubricEvalResult(BaseModel):
-    phase0: Phase0Result
-
-    stage1_conclusion: StageResult | None = None
-    stage2_elements: StageResult | None = None
-    stage3_claims: StageResult | None = None
-    stage4_edges: StageResult | None = None
-    stage5_background: StageResult | None = None
-
-    h_avg: float | None = None
-    h_informed: StageResult | None = None
-    h_blind: StageResult | None = None
-
-    stopped_at: int | None = None
-    structural_fail: bool = False
 
 
 class EdgeEvalResult(BaseModel):
