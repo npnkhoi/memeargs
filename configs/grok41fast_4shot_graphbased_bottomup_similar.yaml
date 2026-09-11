@@ -1,0 +1,65 @@
+name: grok41fast_4shot_graphbased_bottomup_similar
+wandb_project: argraph
+loader:
+  source: data/memeargs_0826_fixed_test.json
+  kwargs:
+    image_dir: data/memeargs_img
+models:
+  openrouter:
+    cls: openai
+    base_url: https://openrouter.ai/api/v1
+    token: ${OPENROUTER_API_KEY}
+    model_id: x-ai/grok-4.20
+  gemini:
+    cls: openai                      # Gemini 3 Flash (paper's auto-eval model) via OpenRouter
+    base_url: https://openrouter.ai/api/v1
+    token: ${OPENROUTER_API_KEY}
+    model_id: google/gemini-3-flash-preview
+demo_pools:
+  memeargs_0826_fixed_train:
+    source: data/memeargs_0826_fixed_train.json
+    image_dir: data/memeargs_img
+stages:
+- inputs:
+  - [Image, human]
+  output: BottomUpGraph
+  processor: LLMProcessor
+  model: openrouter
+  demo:
+    select: similar
+    shots: 4
+    pool: memeargs_0826_fixed_train
+- inputs:
+  - [BottomUpGraph, model]
+  output: GraphByModel
+  processor: GraphConverter
+- inputs:
+  - [Graph, human]
+  output: GraphByHuman
+  processor: HumanGraphProcessor
+- inputs:
+  - [Image, human]
+  - [GraphByHuman, model]
+  - [GraphByModel, model]
+  output: MatchingResult
+  processor: LLMProcessor
+  model: gemini
+  input_format: node_matching
+- inputs:
+  - [MatchingResult, model]
+  - [GraphByHuman, model]
+  - [GraphByModel, model]
+  output: GeminiGraphAutoEvalResult
+  processor: GeminiGraphAutoEvalProcessor
+- inputs:
+  - [MatchingResult, model]
+  - [GraphByHuman, model]
+  - [GraphByModel, model]
+  output: MatchingGEDResult
+  processor: MatchingGEDProcessor
+- inputs:
+  - [MatchingResult, model]
+  - [GraphByHuman, model]
+  - [GraphByModel, model]
+  output: TypedEdgeEvalResult
+  processor: TypedEdgeEvalProcessor

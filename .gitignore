@@ -1,0 +1,11 @@
+.venv
+.conda
+.env
+output/
+tmp/
+data/memeargs_img/
+__pycache__/
+*.pyc
+*.swp
+nohup.out
+.DS_Store

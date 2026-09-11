@@ -1,0 +1,39 @@
+name: edge_construction_image_grok
+wandb_project: argraph
+loader:
+  source: data/memeargs_0826_fixed_test.json
+  kwargs:
+    image_dir: data/memeargs_img
+models:
+  openrouter:
+    cls: openai
+    base_url: https://openrouter.ai/api/v1
+    token: ${OPENROUTER_API_KEY}
+    model_id: x-ai/grok-4.20
+stages:
+- inputs:
+  - [Graph, human]
+  output: GraphByHuman
+  processor: HumanGraphProcessor
+- inputs:
+  - [Image, human]
+  - [GraphByHuman, model]
+  output: EdgeConstructionOutput
+  processor: LLMProcessor
+  model: openrouter
+  input_format: nodes_alphabetical
+- inputs:
+  - [EdgeConstructionOutput, model]
+  - [GraphByHuman, model]
+  output: GraphByModel
+  processor: EdgeConstructionToModelGraphProcessor
+- inputs:
+  - [GraphByHuman, model]
+  - [GraphByModel, model]
+  output: EdgeEvalResult
+  processor: EdgeEvalProcessor
+- inputs:
+  - [GraphByHuman, model]
+  - [GraphByModel, model]
+  output: TypedEdgeEvalResult
+  processor: TypedEdgeEvalProcessor

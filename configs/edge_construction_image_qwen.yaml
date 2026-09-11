@@ -1,0 +1,39 @@
+name: edge_construction_image_qwen
+wandb_project: argraph
+loader:
+  source: data/memeargs_0826_fixed_test.json
+  kwargs:
+    image_dir: data/memeargs_img
+models:
+  local_vlm:
+    cls: openai
+    base_url: ${LOCAL_VLM_URL}
+    token: '-'
+    model_id: Qwen/Qwen2.5-VL-32B-Instruct-AWQ
+stages:
+- inputs:
+  - [Graph, human]
+  output: GraphByHuman
+  processor: HumanGraphProcessor
+- inputs:
+  - [Image, human]
+  - [GraphByHuman, model]
+  output: EdgeConstructionOutput
+  processor: LLMProcessor
+  model: local_vlm
+  input_format: nodes_alphabetical
+- inputs:
+  - [EdgeConstructionOutput, model]
+  - [GraphByHuman, model]
+  output: GraphByModel
+  processor: EdgeConstructionToModelGraphProcessor
+- inputs:
+  - [GraphByHuman, model]
+  - [GraphByModel, model]
+  output: EdgeEvalResult
+  processor: EdgeEvalProcessor
+- inputs:
+  - [GraphByHuman, model]
+  - [GraphByModel, model]
+  output: TypedEdgeEvalResult
+  processor: TypedEdgeEvalProcessor

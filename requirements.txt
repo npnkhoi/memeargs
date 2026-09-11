@@ -1,0 +1,30 @@
+# The pipeline framework: loader, stages, caching, demos, model backends.
+# Pinned to a commit so a run is reproducible; bump deliberately.
+agentflow @ git+https://github.com/npnkhoi/agentflow@5ed6a411a079646f9f7454a3301275f54035c423
+
+climage
+colorama
+accelerate
+pydantic
+tqdm
+transformers
+torch
+torchvision
+bert_score
+qwen-vl-utils
+wandb
+munkres
+google-genai
+python-dotenv
+pytest
+datasets
+openai
+numpy
+networkx
+scipy
+weave
+nltk
+tiktoken
+FlagEmbedding
+lexical-diversity
+pyyaml
