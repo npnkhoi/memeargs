@@ -2,8 +2,7 @@
 
 Code and data for **"MemeArgs: Vision-Language Argument Mining in Persuasive
 Memes"** (Nguyen, Nguyen, Li, Patel, and Ng; Human Language Technology
-Research Institute, University of Texas at Dallas). The paper is included in
-this repo as [`paper.pdf`](paper.pdf).
+Research Institute, University of Texas at Dallas). Access the paper on [ACL Anthology](https://aclanthology.org/2026.emnlp-main.2361/).
 
 This repo builds argument graphs from meme images with a configurable chain of
 VLM stages, and reproduces every data-driven table in the paper (Tables 1, 2,
@@ -135,17 +134,28 @@ throughout the paper.
 
 ## Citation
 
-The paper will appear in the main conference of EMNLP 2026. Cite it as:
-
 ```bibtex
-@inproceedings{nguyen2026memeargs,
-  title     = {MemeArgs: Vision-Language Argument Mining in Persuasive Memes},
-  author    = {Nguyen, Khoi P. N. and Nguyen, Trung N. and Li, Terrence and Patel, Teerth and Ng, Vincent},
-  booktitle = {Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing},
-  year      = {2026},
-  publisher = {Association for Computational Linguistics},
-  note      = {To appear. See paper.pdf in this repository; update with page numbers once the proceedings are published.},
-  url       = {https://github.com/npnkhoi/memeargs}
+@inproceedings{nguyen-etal-2026-memeargs,
+    title = "{M}eme{A}rgs: Vision-Language Argument Mining in Persuasive Memes",
+    author = "Nguyen, Khoi P. N.  and
+      Nguyen, Trung N.  and
+      Li, Terrence  and
+      Patel, Teerth  and
+      Ng, Vincent",
+    editor = "Lee, Hung-Yi  and
+      Dev, Sunipa  and
+      Li, Jessy  and
+      Elliott, Desmond",
+    booktitle = "Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing",
+    month = oct,
+    year = "2026",
+    address = "Budapest, Hungary",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.emnlp-main.2361/",
+    doi = "10.18653/2026.emnlp-main.2361",
+    pages = "53619--53642",
+    ISBN = "979-8-89176-459-0",
+    abstract = "On today{'}s social media, many argumentative artifacts appear in mixed image-text format. Meanwhile, the argument mining community has seen much success in developing argument understanding technologies in text. In this work, we bridge that gap by studying vision-language argument (VLA) parsing: generating an argument graph that captures both the explicit and implicit components of a vision-language argument. To lay the groundwork for this task, we annotate MemeArgs, a corpus of argument graphs for 614 persuasive memes. We then propose an automatic evaluation protocol for VLA parsing that accommodates its generative nature and follows standard argument mining practice. Evaluating current general-purpose vision-language models, we found that they all failed to perform knowledge-grounded visual perception reliably, which distorts their understanding of the arguments. VLA parsing thus presents an exciting challenge for multimodal argument understanding."
 }
 ```
 
